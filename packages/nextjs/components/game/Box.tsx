@@ -14,7 +14,7 @@ const Box = ({ color, index, id }: any) => {
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (
         <div
-          className="box w-10 h-10"
+          className={`box w-10 h-10 absolute box-${index}`}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}

@@ -44,22 +44,24 @@ const Board: NextPage = () => {
   return (
     <>
       <MetaHeader />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="table" direction="horizontal">
-          {provided => (
-            <div
-              className="flex items-center justify-center h-screen"
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {boxes.map((box, index) => (
-                <Box key={box.id} color={box.color} index={index} id={box.id} />
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <div className="flex justify-center h-screen mt-10">
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="table" direction="horizontal">
+            {provided => (
+              <div
+                className="relative w-[500px] h-[400px] bg-slate-100"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {boxes.map((box, index) => (
+                  <Box key={box.id} color={box.color} index={index} id={box.id} />
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
     </>
   );
 };

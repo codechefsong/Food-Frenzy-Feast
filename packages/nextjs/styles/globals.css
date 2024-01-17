@@ -30,3 +30,51 @@ p {
 .btn.btn-ghost {
   @apply shadow-none;
 }
+
+.box-0 {
+  top: 170px;
+  left: 20px;
+}
+
+.box-1 {
+  top: 210px;
+  left: 50px;
+}
+
+.box-2 {
+  top: 250px;
+  left: 80px;
+}
+
+.box-3 {
+  top: 210px;
+  left: 110px;
+}
+
+.box-4 {
+  top: 170px;
+  left: 140px;
+  /* top: 210px;
+  left: 200px; */
+}
+
+.box-5 {
+  top: 130px;
+  left: 150px;
+  /* top: 210px;
+  left: 250px; */
+}
+
+.box-6 {
+  top: 90px;
+  left: 200px;
+  /* top: 210px;
+  left: 300px; */
+}
+
+.box-7 {
+  top: 130px;
+  left: 210px;
+  /* top: 210px;
+  left: 350px; */
+}
