@@ -1,13 +1,33 @@
 import React from "react";
+import dynamic from "next/dynamic";
 
-const Box = ({ color, index, totalBoxes }: any) => {
-  const angle = (360 / totalBoxes) * index;
-  const transformStyle = `rotate(${angle}deg) translate(100px) rotate(${-angle}deg)`;
+const Draggable = dynamic(
+  () =>
+    import("react-beautiful-dnd").then(mod => {
+      return mod.Draggable;
+    }),
+  { ssr: false },
+);
 
+const Box = ({ color, index, id }: any) => {
   return (
-    <div className="box" style={{ backgroundColor: color, transform: transformStyle }}>
-      {index + 1}
-    </div>
+    <Draggable draggableId={id} index={index}>
+      {(provided, snapshot) => (
+        <div
+          className="box w-10 h-10"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          style={{
+            backgroundColor: color,
+            boxShadow: snapshot.isDragging ? "0 4px 8px rgba(0, 0, 0, 0.2)" : "none",
+            ...provided.draggableProps.style,
+          }}
+        >
+          <div>{id}</div>
+        </div>
+      )}
+    </Draggable>
   );
 };
 
