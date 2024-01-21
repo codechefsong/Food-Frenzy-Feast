@@ -17,6 +17,7 @@ contract FoodFrenzyFeast {
     uint256 numberOfPlayers;
     uint256 prizePool;
     bool isFinish;
+    bool isStarted;
   }
 	
   constructor() {}
@@ -25,9 +26,13 @@ contract FoodFrenzyFeast {
     return matchList;
   }
 
+  function getMatcheByID(uint256 _matchId) public view returns (Match memory){
+    return matchList[_matchId];
+  }
+
   function createMatch() external {
     uint256 newMatchId = numberOfMatches.current();
-    matchList.push(Match(newMatchId, 0, 0, false));
+    matchList.push(Match(newMatchId, 0, 0, false, false));
     numberOfMatches.increment();
   }
 
@@ -41,6 +46,7 @@ contract FoodFrenzyFeast {
       uint256 _randomNumber = uint(keccak256(abi.encode(block.timestamp, msg.sender, i))) % 8;
       games[_matchId].push(_randomNumber);
     }
+    matchList[_matchId].isStarted = true;
   }
 
   function takeFood(uint256 _matchId) external {
@@ -56,5 +62,13 @@ contract FoodFrenzyFeast {
     }
 
     return 0;
+  }
+
+  function getGame(uint256 _matchId) external view returns (uint256[] memory) {
+    return games[_matchId];
+  }
+
+  function getPlayerBag(address player) external view returns (uint256[] memory) {
+    return playerBag[player];
   }
 }
