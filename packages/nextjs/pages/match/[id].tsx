@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
@@ -54,9 +55,14 @@ const MatchRoom: NextPage = () => {
         </h1>
 
         <p>Table</p>
-        {foods?.map((f, index) => (
-          <p key={index}>{f.toString()}</p>
-        ))}
+        <div className="relative w-[400px] h-[400px] rounded-full bg-amber-400">
+          {foods?.map((f, index) => (
+            <p key={index} className={`absolute w-[70px] h-[70px] bg-white rounded-full food-${index}`}>
+              {/* {f.toString()} */}
+              <Image className="mt-1 ml-1" alt="Food" width={60} height={60} src="/pie.png" />
+            </p>
+          ))}
+        </div>
 
         <p>Your Foods</p>
         {playerBag?.map((p, index) => (

@@ -78,3 +78,43 @@ p {
   /* top: 210px;
   left: 350px; */
 }
+
+.food-0 {
+  top: 40px;
+  left: 170px;
+}
+
+.food-1 {
+  top: 90px;
+  left: 250px;
+}
+
+.food-2 {
+  top: 150px;
+  left: 300px;
+}
+
+.food-3 {
+  top: 210px;
+  left: 250px;
+}
+
+.food-4 {
+  top: 270px;
+  left: 170px;
+}
+
+.food-5 {
+  top: 210px;
+  left: 90px;
+}
+
+.food-6 {
+  top: 150px;
+  left: 40px;
+}
+
+.food-7 {
+  top: 90px;
+  left: 90px;
+}
