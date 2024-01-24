@@ -47,6 +47,16 @@ const MatchRoom: NextPage = () => {
     },
   });
 
+  const { writeAsync: moveTableToRight } = useScaffoldContractWrite({
+    contractName: "FoodFrenzyFeast",
+    functionName: "moveTableToRight",
+    args: [id as any],
+    onBlockConfirmation: txnReceipt => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+      console.log(txnReceipt);
+    },
+  });
+
   return (
     <div className="flex items-center flex-col flex-grow pt-7">
       <div className="px-5">
@@ -73,28 +83,38 @@ const MatchRoom: NextPage = () => {
             </p>
           ))}
         </div>
-        {!matchData?.isStarted && (
+        <div className="flex flex-col">
+          {!matchData?.isStarted && (
+            <button
+              className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+              onClick={() => startGame()}
+            >
+              Start Game
+            </button>
+          )}
+          {matchData?.isStarted && (
+            <button
+              className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+              onClick={() => takeFood()}
+            >
+              Take Food
+            </button>
+          )}
+          {matchData?.isStarted && (
+            <button
+              className="py-2 px-16 mb-1 mt-3 bg-orange-500 rounded baseline hover:bg-orange-300 disabled:opacity-50"
+              onClick={() => moveTableToRight()}
+            >
+              Move Table
+            </button>
+          )}
           <button
-            className="py-2 px-16 mb-1 mt-3 mr-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-            onClick={() => startGame()}
+            className="py-2 px-16 mb-1 mt-3 bg-gray-300 rounded baseline hover:bg-gray-200 disabled:opacity-50"
+            onClick={() => router.push("/lobby")}
           >
-            Start Game
+            Back
           </button>
-        )}
-        {matchData?.isStarted && (
-          <button
-            className="py-2 px-16 mb-1 mt-3 mr-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-            onClick={() => takeFood()}
-          >
-            Take Food
-          </button>
-        )}
-        <button
-          className="py-2 px-16 mb-1 mt-3 bg-gray-300 rounded baseline hover:bg-gray-200 disabled:opacity-50"
-          onClick={() => router.push("/lobby")}
-        >
-          Back
-        </button>
+        </div>
       </div>
     </div>
   );

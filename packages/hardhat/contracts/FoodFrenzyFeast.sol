@@ -56,6 +56,14 @@ contract FoodFrenzyFeast {
     games[_matchId][position] = _randomNumber;
   }
 
+  function moveTableToRight(uint256 _matchId) external {
+    uint256 num = games[_matchId][games[_matchId].length - 1];
+    for (uint256 i =  games[_matchId].length - 1; i > 0; i--) {
+      games[_matchId][i] =  games[_matchId][i - 1];
+    }
+    games[_matchId][0] = num;
+  }
+
   function getPlayerPosition(uint256 _matchId, address _player) internal view returns (uint256) {
     for (uint i = 0; i < players[_matchId].length; i++) {
       if (players[_matchId][i] == _player) return i;
