@@ -58,17 +58,21 @@ const MatchRoom: NextPage = () => {
         <div className="relative w-[400px] h-[400px] rounded-full bg-amber-400">
           {foods?.map((f, index) => (
             <p key={index} className={`absolute w-[70px] h-[70px] bg-white rounded-full food-${index}`}>
-              {/* {f.toString()} */}
+              {f.toString()}
               <Image className="mt-1 ml-1" alt="Food" width={60} height={60} src="/pie.png" />
             </p>
           ))}
         </div>
 
         <p>Your Foods</p>
-        {playerBag?.map((p, index) => (
-          <p key={index}>{p.toString()}</p>
-        ))}
-
+        <div className="flex flex-wrap w-[400px] gap-3 mb-3">
+          {playerBag?.map((p, index) => (
+            <p key={index} className="w-[70px] h-[70px] bg-white rounded-full">
+              {p.toString()}
+              <Image className="mt-1 ml-1" alt="Food" width={60} height={60} src="/pie.png" />
+            </p>
+          ))}
+        </div>
         {!matchData?.isStarted && (
           <button
             className="py-2 px-16 mb-1 mt-3 mr-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
