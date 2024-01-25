@@ -5,6 +5,12 @@ import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
+const menuItems = [
+  { name: "Pizza", points: 10 },
+  { name: "Burger", points: 8 },
+  { name: "Salad", points: 5 },
+];
+
 const MatchRoom: NextPage = () => {
   const router = useRouter();
   const { address } = useAccount();
@@ -65,68 +71,81 @@ const MatchRoom: NextPage = () => {
   });
 
   return (
-    <div className="flex items-center flex-col flex-grow pt-7">
-      <div className="px-5">
-        <h1 className="text-center mb-5">
-          <span className="block text-2xl mb-2">Match #{id}</span>
-        </h1>
-
-        <p>Table</p>
-        <div className="relative w-[400px] h-[400px] bg-blue-400 flex items-center justify-center">
-          <div className="relative w-[300px] h-[300px] rounded-full bg-amber-400 ">
-            {foods?.map((f, index) => (
-              <p key={index} className={`absolute w-[50px] h-[50px] bg-white rounded-full food-${index}`}>
-                {/* {f.toString()} */}
-                <Image className="mt-1 ml-1" alt="Food" width={40} height={40} src="/pie.png" />
+    <div className="flex flex-col items-center">
+      <h1 className="text-center mt-7 mb-5">
+        <span className="block text-2xl mb-2">Match #{id}</span>
+      </h1>
+      <div className="grid lg:grid-cols-2">
+        <div className="px-5">
+          <p>Table</p>
+          <div className="relative w-[400px] h-[400px] bg-blue-400 flex items-center justify-center">
+            <div className="relative w-[300px] h-[300px] rounded-full bg-amber-400 ">
+              {foods?.map((f, index) => (
+                <p key={index} className={`absolute w-[50px] h-[50px] bg-white rounded-full food-${index}`}>
+                  {/* {f.toString()} */}
+                  <Image className="mt-1 ml-1" alt="Food" width={40} height={40} src="/pie.png" />
+                </p>
+              ))}
+            </div>
+            {players?.map((p, index) => (
+              <p key={index} className={`absolute w-[50px] h-[50px] bg-white chair-${index}`}>
+                <Address address={p} />
               </p>
             ))}
           </div>
-          {players?.map((p, index) => (
-            <p key={index} className={`absolute w-[50px] h-[50px] bg-white chair-${index}`}>
-              <Address address={p} />
-            </p>
-          ))}
         </div>
-        <p>Your Foods</p>
-        <div className="flex flex-wrap w-[400px] gap-3 mb-3">
-          {playerBag?.map((p, index) => (
-            <p key={index} className="w-[70px] h-[70px] bg-white rounded-full">
-              {p.toString()}
-              <Image className="mt-1 ml-1" alt="Food" width={60} height={60} src="/pie.png" />
-            </p>
-          ))}
-        </div>
-        <div className="flex flex-col">
-          {!matchData?.isStarted && (
+
+        <div>
+          <p>Your Foods</p>
+          <div className="flex flex-wrap w-[400px] gap-3 mb-3">
+            {playerBag?.map((p, index) => (
+              <p key={index} className="w-[70px] h-[70px] bg-white rounded-full">
+                {p.toString()}
+                <Image className="mt-1 ml-1" alt="Food" width={60} height={60} src="/pie.png" />
+              </p>
+            ))}
+          </div>
+          <div className="flex flex-col">
+            {!matchData?.isStarted && (
+              <button
+                className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+                onClick={() => startGame()}
+              >
+                Start Game
+              </button>
+            )}
+            {matchData?.isStarted && (
+              <button
+                className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+                onClick={() => takeFood()}
+              >
+                Take Food
+              </button>
+            )}
+            {matchData?.isStarted && (
+              <button
+                className="py-2 px-16 mb-1 mt-3 bg-orange-500 rounded baseline hover:bg-orange-300 disabled:opacity-50"
+                onClick={() => moveTableToRight()}
+              >
+                Move Table
+              </button>
+            )}
             <button
-              className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-              onClick={() => startGame()}
+              className="py-2 px-16 mb-1 mt-3 bg-gray-300 rounded baseline hover:bg-gray-200 disabled:opacity-50"
+              onClick={() => router.push("/lobby")}
             >
-              Start Game
+              Back
             </button>
-          )}
-          {matchData?.isStarted && (
-            <button
-              className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-              onClick={() => takeFood()}
-            >
-              Take Food
-            </button>
-          )}
-          {matchData?.isStarted && (
-            <button
-              className="py-2 px-16 mb-1 mt-3 bg-orange-500 rounded baseline hover:bg-orange-300 disabled:opacity-50"
-              onClick={() => moveTableToRight()}
-            >
-              Move Table
-            </button>
-          )}
-          <button
-            className="py-2 px-16 mb-1 mt-3 bg-gray-300 rounded baseline hover:bg-gray-200 disabled:opacity-50"
-            onClick={() => router.push("/lobby")}
-          >
-            Back
-          </button>
+            <h2 className="mt-5 text-[20px]">Points</h2>
+            <ul className="bg-white">
+              {menuItems.map((item, index) => (
+                <li key={index} className="flex justify-between items-center border-b py-2">
+                  <span>{item.name}</span>
+                  <span className="font-bold">{item.points} points</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
