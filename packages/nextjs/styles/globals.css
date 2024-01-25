@@ -80,41 +80,81 @@ p {
 }
 
 .food-0 {
-  top: 40px;
-  left: 170px;
+  top: 10px;
+  left: 130px;
 }
 
 .food-1 {
-  top: 90px;
-  left: 250px;
+  top: 50px;
+  left: 200px;
 }
 
 .food-2 {
-  top: 150px;
-  left: 300px;
+  top: 120px;
+  left: 235px;
 }
 
 .food-3 {
-  top: 210px;
-  left: 250px;
+  top: 170px;
+  left: 200px;
 }
 
 .food-4 {
-  top: 270px;
-  left: 170px;
+  top: 220px;
+  left: 130px;
 }
 
 .food-5 {
-  top: 210px;
-  left: 90px;
+  top: 170px;
+  left: 60px;
 }
 
 .food-6 {
-  top: 150px;
-  left: 40px;
+  top: 120px;
+  left: 15px;
 }
 
 .food-7 {
-  top: 90px;
-  left: 90px;
+  top: 50px;
+  left: 60px;
+}
+
+.chair-0 {
+  top: -15px;
+  left: 180px;
+}
+
+.chair-1 {
+  top: 50px;
+  right: 25px;
+}
+
+.chair-2 {
+  top: 170px;
+  right: -5px;
+}
+
+.chair-3 {
+  top: 270px;
+  right: 25px;
+}
+
+.chair-4 {
+  bottom: -15px;
+  left: 180px;
+}
+
+.chair-5 {
+  top: 270px;
+  left: 20px;
+}
+
+.chair-6 {
+  top: 170px;
+  left: 0;
+}
+
+.chair-7 {
+  top: 50px;
+  left: 20px;
 }

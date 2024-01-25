@@ -30,6 +30,10 @@ contract FoodFrenzyFeast {
     return matchList[_matchId];
   }
 
+  function getPlayersByID(uint256 _matchId) public view returns (address[] memory){
+    return players[_matchId];
+  }
+
   function createMatch() external {
     uint256 newMatchId = numberOfMatches.current();
     matchList.push(Match(newMatchId, 0, 0, false, false));

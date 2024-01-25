@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
+import { Address } from "~~/components/scaffold-eth";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const MatchRoom: NextPage = () => {
@@ -18,6 +19,12 @@ const MatchRoom: NextPage = () => {
   const { data: foods } = useScaffoldContractRead({
     contractName: "FoodFrenzyFeast",
     functionName: "getGame",
+    args: [id as any],
+  });
+
+  const { data: players } = useScaffoldContractRead({
+    contractName: "FoodFrenzyFeast",
+    functionName: "getPlayersByID",
     args: [id as any],
   });
 
@@ -65,15 +72,21 @@ const MatchRoom: NextPage = () => {
         </h1>
 
         <p>Table</p>
-        <div className="relative w-[400px] h-[400px] rounded-full bg-amber-400">
-          {foods?.map((f, index) => (
-            <p key={index} className={`absolute w-[70px] h-[70px] bg-white rounded-full food-${index}`}>
-              {f.toString()}
-              <Image className="mt-1 ml-1" alt="Food" width={60} height={60} src="/pie.png" />
+        <div className="relative w-[400px] h-[400px] bg-blue-400 flex items-center justify-center">
+          <div className="relative w-[300px] h-[300px] rounded-full bg-amber-400 ">
+            {foods?.map((f, index) => (
+              <p key={index} className={`absolute w-[50px] h-[50px] bg-white rounded-full food-${index}`}>
+                {/* {f.toString()} */}
+                <Image className="mt-1 ml-1" alt="Food" width={40} height={40} src="/pie.png" />
+              </p>
+            ))}
+          </div>
+          {players?.map((p, index) => (
+            <p key={index} className={`absolute w-[50px] h-[50px] bg-white chair-${index}`}>
+              <Address address={p} />
             </p>
           ))}
         </div>
-
         <p>Your Foods</p>
         <div className="flex flex-wrap w-[400px] gap-3 mb-3">
           {playerBag?.map((p, index) => (
