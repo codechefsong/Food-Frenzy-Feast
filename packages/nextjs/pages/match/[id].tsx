@@ -6,9 +6,14 @@ import { Address } from "~~/components/scaffold-eth";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const menuItems = [
-  { name: "Pizza", points: 10 },
-  { name: "Burger", points: 8 },
-  { name: "Salad", points: 5 },
+  { url: "/orange.png", points: 3 },
+  { url: "/apple.png", points: 4 },
+  { url: "/pumpkin.png", points: 5 },
+  { url: "/egg.png", points: 6 },
+  { url: "/pizza.png", points: 7 },
+  { url: "/pie.png", points: 8 },
+  { url: "/hamburger.png", points: 9 },
+  { url: "/cake.png", points: 10 },
 ];
 
 const MatchRoom: NextPage = () => {
@@ -83,7 +88,7 @@ const MatchRoom: NextPage = () => {
               {foods?.map((f, index) => (
                 <p key={index} className={`absolute w-[50px] h-[50px] bg-white rounded-full food-${index}`}>
                   {/* {f.toString()} */}
-                  <Image className="mt-1 ml-1" alt="Food" width={40} height={40} src="/pie.png" />
+                  <Image className="mt-1 ml-1" alt="Food" width={40} height={40} src={menuItems[Number(f)].url} />
                 </p>
               ))}
             </div>
@@ -140,7 +145,7 @@ const MatchRoom: NextPage = () => {
             <ul className="bg-white">
               {menuItems.map((item, index) => (
                 <li key={index} className="flex justify-between items-center border-b py-2">
-                  <span>{item.name}</span>
+                  <Image className="mt-1 ml-1" alt="Food" width={40} height={40} src={item.url} />
                   <span className="font-bold">{item.points} points</span>
                 </li>
               ))}
