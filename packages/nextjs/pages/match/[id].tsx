@@ -105,8 +105,7 @@ const MatchRoom: NextPage = () => {
           <div className="flex flex-wrap w-[400px] gap-3 mb-3">
             {playerBag?.map((p, index) => (
               <p key={index} className="w-[70px] h-[70px] bg-white rounded-full">
-                {p.toString()}
-                <Image className="mt-1 ml-1" alt="Food" width={60} height={60} src="/pie.png" />
+                <Image className="mt-1 ml-1" alt="Food" width={60} height={60} src={menuItems[Number(p)].url} />
               </p>
             ))}
           </div>
