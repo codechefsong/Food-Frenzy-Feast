@@ -95,6 +95,7 @@ const MatchRoom: NextPage = () => {
             {players?.map((p, index) => (
               <p key={index} className={`absolute w-[50px] h-[50px] bg-white chair-${index}`}>
                 <Address address={p} />
+                {p === address && <p className="mt-0">(You)</p>}
               </p>
             ))}
           </div>
@@ -144,7 +145,10 @@ const MatchRoom: NextPage = () => {
             <ul className="bg-white">
               {menuItems.map((item, index) => (
                 <li key={index} className="flex justify-between items-center border-b py-2">
-                  <Image className="mt-1 ml-1" alt="Food" width={40} height={40} src={item.url} />
+                  <div className="flex items-center">
+                    <Image className="mt-1 ml-1" alt="Food" width={40} height={40} src={item.url} />
+                    <span className="font-bold ml-3">3X</span>
+                  </div>
                   <span className="font-bold">{item.points} points</span>
                 </li>
               ))}
